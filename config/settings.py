@@ -1,9 +1,11 @@
 """
 
 
-pip install celery
-pip install flower
-pip install stripe
+pip install celery  Задачник
+pip install flower  Вебморда задачника
+pip install stripe   Платилка
+pip install weasyprint  PDFgenerator
+
 
 docker pull rabbitmq
 # docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
@@ -123,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
