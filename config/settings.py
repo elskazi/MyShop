@@ -124,3 +124,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Хранение данных корзины в сессии
 CART_SESSION_ID = 'cart'
+
+# В случае если вы хотите использовать отправку почты в тестовом режиме (в консоли), раскомментируйте первую строку.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # для консоли
+
+# YANDEX Шестерня- Все настройки - Почтовые программы - Разрешить доступ к почтовому ящику с помощью почтовых клиентов
+# С сервера imap.yandex.ru по протоколу IMAP
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # для реальной отправки
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'elskazi@yandex.ru'
+EMAIL_HOST_PASSWORD = ' '

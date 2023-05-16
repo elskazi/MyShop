@@ -5,6 +5,8 @@ from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
+from .tasks import order_created  # отправка писем через  Celery
+
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -18,6 +20,8 @@ def order_create(request):
                     quantity=item['quantity'])
             # clear the cart
             cart.clear()
+            # Запуск асинхронной задачи. # отправка писем через  Celery
+            order_created.delay(order.id)
             return render(request,
                           'orders/order/created.html',
                           {'order': order})
