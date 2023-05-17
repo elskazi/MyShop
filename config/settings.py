@@ -8,6 +8,7 @@ pip install flower  Вебморда задачника
 pip install stripe   Платилка
 pip install weasyprint  #PDFgenerator
 # For windowsd - Install MSYS2 ,Install GTK3 DLL, прописать Path, перезагрузить пк
+pip install redis ДЛя рекомендованных товаров
 
 
 docker pull rabbitmq
@@ -160,3 +161,8 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51N8LiYERlNEa02L1zb315Im54ZIQEqA6mhSeX6TABQFQ0
 STRIPE_SECRET_KEY = 'sk_test_51N8LiYERlNEa02L1I2ZPqGHGdIsP620dbsm5C120uPtNI5she5O1KSPEW35ltmcKdxJJMTsjDsp6gTFXACrfX32900y7JwLHex'  # Secret key
 STRIPE_API_VERSION = '2022-11-15'
 STRIPE_WEBHOOK_SECRET = 'whsec_3508b777688cb6d06fb7a0d0561af493174f8ec9e0b962f6022fd08025ab8517'
+
+# Redis settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
