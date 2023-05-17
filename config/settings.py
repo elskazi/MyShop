@@ -1,11 +1,13 @@
 """
 
 
+python manage.py startapp coupons
+
 pip install celery  Задачник
 pip install flower  Вебморда задачника
 pip install stripe   Платилка
 pip install weasyprint  #PDFgenerator
-# For windowsd - Install MSYS2 ,Install GTK3 DLL, прописать Path, перезагрузить пк 
+# For windowsd - Install MSYS2 ,Install GTK3 DLL, прописать Path, перезагрузить пк
 
 
 docker pull rabbitmq
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',  # Корзина
     'orders.apps.OrdersConfig',  # Заказы
     'payment.apps.PaymentConfig',  # платежная система
+    'coupons.apps.CouponsConfig', # купоны
 ]
 
 MIDDLEWARE = [
