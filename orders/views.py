@@ -14,7 +14,7 @@ from django.template.loader import render_to_string
 import weasyprint
 import os
 
-os.add_dll_directory(r"C:\Program Files\GTK3\bin")
+
 
 @staff_member_required
 def admin_order_pdf(request, order_id):

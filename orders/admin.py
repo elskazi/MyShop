@@ -12,8 +12,6 @@ def order_payment(obj):
         html = f'<a href="{url}" target="_blank">{obj.stripe_id}</a>'
         return mark_safe(html)
     return ''
-
-
 order_payment.short_description = 'Stripe payment'
 
 
@@ -49,8 +47,6 @@ def order_detail(obj):
 def order_pdf(obj):
     url = reverse('orders:admin_order_pdf', args=[obj.id])
     return mark_safe(f'<a href="{url}">PDF</a>')
-
-
 order_pdf.short_description = 'Invoice'
 
 # Register your models here.
