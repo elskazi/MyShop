@@ -8,10 +8,13 @@ pip install flower  Вебморда задачника
 pip install stripe   Платилка
 pip install weasyprint  #PDFgenerator
 # For windowsd - Install MSYS2 ,Install GTK3 DLL, прописать Path, перезагрузить пк
+
+##redis
 pip install redis ДЛя рекомендованных товаров
+docker run -it --rm --name redis -p 6379:6379 redis
 
 
-docker pull rabbitmq
+###docker pull rabbitmq
 # docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
 # celery -A shop worker -l info
 
