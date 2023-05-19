@@ -34,8 +34,7 @@ class Recommender:
             # Удаляем ID товаров, которые были переданы в списке.
             r.zrem(tmp_key, *product_ids)
             # Получаем товары, отсортированные по рейтингу.
-            suggestions = r.zrange(tmp_key, 0, -1,
-                                   desc=True)[:max_results]
+            suggestions = r.zrange(tmp_key, 0, -1, desc=True)[:max_results]
             # Удаляем временный ключ.
             r.delete(tmp_key)
         suggested_products_ids = [int(id) for id in suggestions]

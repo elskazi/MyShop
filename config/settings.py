@@ -1,6 +1,4 @@
 """
-
-
 python manage.py startapp coupons
 
 pip install celery  Задачник
@@ -15,13 +13,29 @@ docker run -it --rm --name redis -p 6379:6379 redis
 
 
 ###docker pull rabbitmq
-# docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
-# celery -A shop worker -l info
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+celery -A shop worker -l info
 
+
+# Перевод, установить
+https://mlocati.github.io/articles/gettext-iconv-windows.html
+Делаем измениения запускаем
+django-admin makemessages --all
+
+pip install django-rosetta  # Перевод через админку http://127.0.0.1:8000/rosetta/
+
+pip install django-parler # Перевод данных (статьи категории)
+# поселе измениния модели а Админа
+python manage.py makemigrations shop --name "translations
+отредактировать migrations/0002_translations.py в приложении shop в двух местах  НА  bases=(parler.models.TranslatableModel, models.Model),
+python manage.py migrate shop
+
+
+pip install django-localflavo #Настройка формата локализации не использовал
 
 
 """
-
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,13 +65,18 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',  # Корзина
     'orders.apps.OrdersConfig',  # Заказы
     'payment.apps.PaymentConfig',  # платежная система
-    'coupons.apps.CouponsConfig', # купоны
+    'coupons.apps.CouponsConfig',  # купоны
+    'rosetta',  # Перевод через админку http://127.0.0.1:8000/rosetta/
+    'parler',  # Перевод данных
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # Это промежуточный слой для управления сессиями.
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # Это промежуточный слой для локализации.
+    'django.middleware.locale.LocaleMiddleware',
+    # CommonMiddleware должен находиться в списке после LocaleMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -122,6 +141,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'ru'
+LANGUAGES = [
+    ('en', _('English')),
+    ('ru', _('Russian')),
+]
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+# django-parler settings
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'ru'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
 
 TIME_ZONE = 'UTC'
 
